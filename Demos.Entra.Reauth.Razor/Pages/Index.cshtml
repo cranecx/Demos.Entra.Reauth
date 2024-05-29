@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-1">Reauthentication demo</h1>
+</div>
+
+<div class="text-center mb-5">
+    <h2 class="display-4">Simple authentication</h2>
+    <div>
+        <form method="post">
+            
+            <textarea class="form-control mb-2" disabled>
+                @Model.SimpleAuthMessage
+            </textarea>
+            <button type="submit" class="btn btn-primary">Retrieve Message</button>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <h2 class="display-4">Reauthentication needed</h2>
+    <div>
+        <form asp-page-handler="reauth" method="post">
+            <textarea class="form-control  mb-2" disabled>
+                @Model.ReAuthMessage
+            </textarea>
+            <button type="submit" class="btn btn-primary">Retrieve Message</button>
+        </form>
+    </div>
+</div>
+

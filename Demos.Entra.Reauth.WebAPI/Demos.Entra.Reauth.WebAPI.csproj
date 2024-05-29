@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a811748f-f95b-4024-baf2-b591f06bf939</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.19.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Demos.Entra.Reauth.Shared\Demos.Entra.Reauth.Shared.csproj" />
+    <ProjectReference Include="..\Demos.Extensions.Authorization.Entra.ReAuthorize\Demos.Extensions.Authorization.Entra.ReAuthorize.csproj" />
+  </ItemGroup>
+
+</Project>
