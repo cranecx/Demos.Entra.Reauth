@@ -1,5 +1,7 @@
 using Demos.Entra.Reauth.Mvc.Models;
 using Demos.Entra.Reauth.Razor.Services;
+using Demos.Entra.Reauth.Shared;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -24,6 +26,7 @@ namespace Demos.Entra.Reauth.Mvc.Controllers
         }
 
         [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Simple()
         {
             var message = await _messagesClient.GetSimpleMessage();
@@ -32,6 +35,8 @@ namespace Demos.Entra.Reauth.Mvc.Controllers
         }
 
         [HttpPost]
+        [HttpGet]
+        [ReAuthorize(15, OpenIdConnectDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ReAuth()
         {
             var message = await _messagesClient.GetReAuthMessage();

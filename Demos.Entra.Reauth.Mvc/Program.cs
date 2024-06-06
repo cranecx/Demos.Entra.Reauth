@@ -1,5 +1,6 @@
-using Demos.Entra.Reauth.Razor.MessageHandlers;
+using Demos.Entra.Reauth.Mvc.Services;
 using Demos.Entra.Reauth.Razor.Services;
+using Demos.Entra.Reauth.Shared;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -14,17 +15,14 @@ builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(options =>
     {
         builder.Configuration.GetSection("Entra").Bind(options);
+        options.UseReAuthorize();
     })
     .EnableTokenAcquisitionToCallDownstreamApi()
     .AddInMemoryTokenCaches();
 
-builder.Services.AddScoped<MessagesClient>()
-    .AddTransient<AuthorizationMessageHandler>()
-    .AddHttpClient("messages", client =>
-    {
-        client.BaseAddress = new("https://localhost:7237/");
-    })
-    .AddHttpMessageHandler<AuthorizationMessageHandler>();
+builder.Services.AddHttpClient()
+    .Configure<MessageClientOptions>(builder.Configuration.GetSection("MessageClient"))
+    .AddScoped<MessagesClient>();
 
 var app = builder.Build();
 

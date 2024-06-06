@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Extensions.Azure;
 using Microsoft.Identity.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +15,7 @@ namespace Demos.Entra.Reauth.Shared
     {
         public static MicrosoftIdentityOptions UseReAuthorize(this MicrosoftIdentityOptions options)
         {
+            options.ClaimActions.MapJsonKey("iat", "iat");
             options.Events.OnRedirectToIdentityProvider = context =>
             {
                 if (context.Reauthenticate())

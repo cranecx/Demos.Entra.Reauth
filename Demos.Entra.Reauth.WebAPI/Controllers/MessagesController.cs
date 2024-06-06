@@ -1,4 +1,5 @@
 using Demos.Entra.Reauth.Shared;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ namespace Demos.Entra.Reauth.WebAPI.Controllers
         }
 
         [HttpGet("reauth")]
-        [ReAuthorize(3000)]
+        [ReAuthorize(315, JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<RetrievedMessage> GetReAuthMessage()
         {
             return Ok(new RetrievedMessage
